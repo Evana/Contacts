@@ -30,6 +30,7 @@ class ContactListViewController: CollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initialiseViewModel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -37,6 +38,7 @@ class ContactListViewController: CollectionViewController {
         setupSegmentControl()
         setupCollectionView()
         setupShowMoreButton()
+        setupActivityIndicator()
     }
     
     override func viewDidLayoutSubviews() {
@@ -53,6 +55,15 @@ class ContactListViewController: CollectionViewController {
         if let collectionViewLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             collectionViewLayout.sectionInset = flowLayout.edgeInsets
         }
+    }
+    
+    private func setupActivityIndicator() {
+        activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color = .gray
+        activityIndicator.center = view.center
+        activityIndicator.startAnimating()
+        self.view.addSubview(activityIndicator)
     }
     
     private func setupSegmentControl() {
@@ -168,12 +179,18 @@ class ContactListViewController: CollectionViewController {
 extension ContactListViewController:  UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 20
+        return contactListViewModel.numberOfCells
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath) as! ContactCollectionViewCell
-       
+        let cellVm = contactListViewModel.getCellViewModel( at: indexPath )
+        cell.contactCellViewModel = cellVm
+        cell.btnTapAction = { [weak self]  in
+            guard let self = self else { return }
+            #warning("Need to implement for favorite")
+            
+        }
         return cell
     }
     
