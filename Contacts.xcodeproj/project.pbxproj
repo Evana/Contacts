@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		205A7C1422298FB200F28112 /* ContactCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C1322298FB200F28112 /* ContactCollectionViewFlowLayout.swift */; };
+		205A7C1622298FF000F28112 /* CollectionViewSizeClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C1522298FF000F28112 /* CollectionViewSizeClass.swift */; };
+		205A7C182229903900F28112 /* ContactCollectionViewGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C172229903900F28112 /* ContactCollectionViewGridLayout.swift */; };
 		2071C4CA2229809A0038C299 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4C92229809A0038C299 /* AppDelegate.swift */; };
 		2071C4D12229809C0038C299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2071C4D02229809C0038C299 /* Assets.xcassets */; };
 		2071C4D42229809C0038C299 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2071C4D22229809C0038C299 /* LaunchScreen.storyboard */; };
@@ -15,6 +18,8 @@
 		2071C4EE222984490038C299 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4ED222984490038C299 /* ContactService.swift */; };
 		2071C4F4222986A80038C299 /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4F3222986A80038C299 /* ContactListViewModel.swift */; };
 		2071C4F622298A740038C299 /* ContactListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4F522298A740038C299 /* ContactListViewModelTests.swift */; };
+		2071C4FB22298E100038C299 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4FA22298E100038C299 /* ContactListViewController.swift */; };
+		2071C50022298EB90038C299 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4FF22298EB90038C299 /* CollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,6 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		205A7C1322298FB200F28112 /* ContactCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		205A7C1522298FF000F28112 /* CollectionViewSizeClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSizeClass.swift; sourceTree = "<group>"; };
+		205A7C172229903900F28112 /* ContactCollectionViewGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewGridLayout.swift; sourceTree = "<group>"; };
 		2071C4C62229809A0038C299 /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2071C4C92229809A0038C299 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2071C4D02229809C0038C299 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -40,6 +48,8 @@
 		2071C4ED222984490038C299 /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		2071C4F3222986A80038C299 /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
 		2071C4F522298A740038C299 /* ContactListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModelTests.swift; sourceTree = "<group>"; };
+		2071C4FA22298E100038C299 /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
+		2071C4FF22298EB90038C299 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +91,7 @@
 		2071C4C82229809A0038C299 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				2071C4FD22298E730038C299 /* Helper */,
 				2071C4F0222986670038C299 /* Module */,
 				2071C4C92229809A0038C299 /* AppDelegate.swift */,
 				2071C4D02229809C0038C299 /* Assets.xcassets */,
@@ -120,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				2071C4F1222986790038C299 /* Contacts */,
+				2071C4FC22298E1C0038C299 /* ViewController */,
 			);
 			path = Module;
 			sourceTree = "<group>";
@@ -140,6 +152,33 @@
 				2071C4F3222986A80038C299 /* ContactListViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		2071C4FC22298E1C0038C299 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2071C4FA22298E100038C299 /* ContactListViewController.swift */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		2071C4FD22298E730038C299 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				2071C4FE22298E7A0038C299 /* CollectionViewLayout */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		2071C4FE22298E7A0038C299 /* CollectionViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				2071C4FF22298EB90038C299 /* CollectionViewController.swift */,
+				205A7C1322298FB200F28112 /* ContactCollectionViewFlowLayout.swift */,
+				205A7C1522298FF000F28112 /* CollectionViewSizeClass.swift */,
+				205A7C172229903900F28112 /* ContactCollectionViewGridLayout.swift */,
+			);
+			path = CollectionViewLayout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,10 +281,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				205A7C1622298FF000F28112 /* CollectionViewSizeClass.swift in Sources */,
+				205A7C182229903900F28112 /* ContactCollectionViewGridLayout.swift in Sources */,
 				2071C4EB2229839C0038C299 /* Contact.swift in Sources */,
 				2071C4F4222986A80038C299 /* ContactListViewModel.swift in Sources */,
 				2071C4CA2229809A0038C299 /* AppDelegate.swift in Sources */,
+				205A7C1422298FB200F28112 /* ContactCollectionViewFlowLayout.swift in Sources */,
+				2071C50022298EB90038C299 /* CollectionViewController.swift in Sources */,
 				2071C4EE222984490038C299 /* ContactService.swift in Sources */,
+				2071C4FB22298E100038C299 /* ContactListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
