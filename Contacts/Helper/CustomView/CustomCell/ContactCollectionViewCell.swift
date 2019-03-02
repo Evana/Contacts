@@ -83,7 +83,7 @@ class ContactCollectionViewCell: UICollectionViewCell {
         favoriteButton.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 3/4).isActive = true
         favoriteButton.widthAnchor.constraint(equalTo: favoriteButton.heightAnchor, multiplier: 1.0).isActive = true
         favoriteButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20).isActive = true
-        favoriteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
+        favoriteButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15).isActive = true
         favoriteButton.setImage(UIImage(named: "favorite"), for: .normal)
         favoriteButton.addTarget(self, action: #selector(tappedOnFavorite), for: .touchUpInside)
         
@@ -92,13 +92,13 @@ class ContactCollectionViewCell: UICollectionViewCell {
         view.addSubview(nameLabel)
         view.addSubview(emailLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 5).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         nameLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant:-10).isActive = true
         nameLabel.font = UIFont.preferredFont(forTextStyle: .body)
         emailLabel.translatesAutoresizingMaskIntoConstraints = false
         emailLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 5).isActive = true
-        emailLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10).isActive = true
+        emailLabel.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -15).isActive = true
         emailLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         emailLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant:-10).isActive = true
         emailLabel.font = UIFont.preferredFont(forTextStyle: .body)
