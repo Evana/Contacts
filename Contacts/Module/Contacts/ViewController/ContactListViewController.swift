@@ -104,6 +104,7 @@ class ContactListViewController: CollectionViewController {
                                constant: -30).isActive = true
         }
         segmentedControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        segmentedControl.addTarget(self, action: #selector(ContactListViewController.indexChanged(_:)), for: .valueChanged)
     }
     
     func setupShowMoreButton() {
@@ -139,7 +140,6 @@ class ContactListViewController: CollectionViewController {
     
     func initialiseViewModel() {
         
-        // Naive binding
         contactListViewModel.showAlertClosure = { [weak self]  in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -174,6 +174,20 @@ class ContactListViewController: CollectionViewController {
         alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    @objc func indexChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex{
+        case 0:
+            contactListViewModel.isFavorite = false
+            showMoreButton.isEnabled = true
+        case 1:
+            contactListViewModel.isFavorite = true
+            showMoreButton.isEnabled = false
+        default:
+            break
+        }
+    }
+    
 }
 
 extension ContactListViewController:  UICollectionViewDelegate, UICollectionViewDataSource {
@@ -187,9 +201,7 @@ extension ContactListViewController:  UICollectionViewDelegate, UICollectionView
         let cellVm = contactListViewModel.getCellViewModel( at: indexPath )
         cell.contactCellViewModel = cellVm
         cell.btnTapAction = { [weak self]  in
-            guard let self = self else { return }
-            #warning("Need to implement for favorite")
-            
+            self?.contactListViewModel.updateFavorite(for: indexPath)
         }
         return cell
     }

@@ -88,7 +88,7 @@
 			isa = PBXGroup;
 			children = (
 				205A7C1F222994A700F28112 /* CustomCell */,
-				205A7C1D2229943A00F28112 /* CustomUIButton.swift */,
+				205A7C22222ABBF700F28112 /* CustomButton */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -99,6 +99,14 @@
 				205A7C20222994C800F28112 /* ContactCollectionViewCell.swift */,
 			);
 			path = CustomCell;
+			sourceTree = "<group>";
+		};
+		205A7C22222ABBF700F28112 /* CustomButton */ = {
+			isa = PBXGroup;
+			children = (
+				205A7C1D2229943A00F28112 /* CustomUIButton.swift */,
+			);
+			path = CustomButton;
 			sourceTree = "<group>";
 		};
 		2071C4BD2229809A0038C299 = {
