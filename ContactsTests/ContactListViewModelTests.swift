@@ -37,6 +37,28 @@ class ContactListViewModelTests: XCTestCase {
         mockService?.fetchFail(error: error)
         XCTAssertEqual(self.contactListViewModel?.alertMessage, error.localizedDescription)
     }
+    
+    func fetchContactFinish() {
+        mockService?.contacts = StubContactsGenerator().stubContacts()
+        contactListViewModel?.fetchContact()
+        mockService?.fetchSuccess()
+    }
+    
+    func testGetCellViewModel() {
+        fetchContactFinish()
+        let indexPath = IndexPath(row: 0, section: 0)
+        let cellViewModel = contactListViewModel?.getCellViewModel(at: indexPath)
+        let contact = mockService?.contacts[indexPath.row]
+        XCTAssertEqual(cellViewModel?.name, "\(contact!.firstName) \(contact!.lastName)" )
+    }
+    
+    func testCreateCellViewModel() {
+        fetchContactFinish()
+        let indexPath = IndexPath(row: 4, section: 0)
+        let contact = mockService?.contacts[indexPath.row]
+        let cellViewModel = contactListViewModel?.createCellViewModel(contact: contact!)
+        XCTAssertEqual(cellViewModel?.email, "\(contact?.email ?? "")")
+    }
 }
 
 class MockApiService: ContactServiceProtocol {
@@ -56,5 +78,15 @@ class MockApiService: ContactServiceProtocol {
     
     func fetchSuccess() {
         completeClouser?(true, contacts, nil)
+    }
+}
+
+class StubContactsGenerator {
+    func stubContacts() -> [Contact] {
+        let path = Bundle.main.path(forResource: "contacts", ofType: "json")!
+        let data = try! Data(contentsOf: URL(fileURLWithPath: path))
+        let decoder = JSONDecoder()
+        let contacts = try! decoder.decode([Contact].self, from: data)
+        return contacts
     }
 }

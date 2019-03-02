@@ -116,6 +116,7 @@ class ContactListViewController: CollectionViewController {
         showMoreButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         showMoreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         showMoreButton.addTarget(self, action: #selector(showMore(_:)), for: .touchUpInside)
+        showMoreButton.isHidden = true
     }
     
     private func setupCollectionView() {
@@ -165,6 +166,7 @@ class ContactListViewController: CollectionViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.showMoreButton.isHidden = false
             }
         }
         contactListViewModel.fetchContact()

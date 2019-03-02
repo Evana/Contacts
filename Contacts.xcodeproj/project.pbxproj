@@ -13,6 +13,7 @@
 		205A7C1A2229936E00F28112 /* ApplicationWindowSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C192229936E00F28112 /* ApplicationWindowSize.swift */; };
 		205A7C1E2229943A00F28112 /* CustomUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C1D2229943A00F28112 /* CustomUIButton.swift */; };
 		205A7C21222994C800F28112 /* ContactCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C20222994C800F28112 /* ContactCollectionViewCell.swift */; };
+		205A7C24222AC2DC00F28112 /* contacts.json in Resources */ = {isa = PBXBuildFile; fileRef = 205A7C23222AC2DC00F28112 /* contacts.json */; };
 		2071C4CA2229809A0038C299 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4C92229809A0038C299 /* AppDelegate.swift */; };
 		2071C4D12229809C0038C299 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2071C4D02229809C0038C299 /* Assets.xcassets */; };
 		2071C4D42229809C0038C299 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2071C4D22229809C0038C299 /* LaunchScreen.storyboard */; };
@@ -42,6 +43,7 @@
 		205A7C192229936E00F28112 /* ApplicationWindowSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationWindowSize.swift; sourceTree = "<group>"; };
 		205A7C1D2229943A00F28112 /* CustomUIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomUIButton.swift; sourceTree = "<group>"; };
 		205A7C20222994C800F28112 /* ContactCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewCell.swift; sourceTree = "<group>"; };
+		205A7C23222AC2DC00F28112 /* contacts.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = contacts.json; sourceTree = "<group>"; };
 		2071C4C62229809A0038C299 /* Contacts.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Contacts.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2071C4C92229809A0038C299 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2071C4D02229809C0038C299 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 		2071C4E9222982DF0038C299 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				205A7C23222AC2DC00F28112 /* contacts.json */,
 				2071C4EA2229839C0038C299 /* Contact.swift */,
 			);
 			path = Model;
@@ -304,6 +307,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2071C4D42229809C0038C299 /* LaunchScreen.storyboard in Resources */,
+				205A7C24222AC2DC00F28112 /* contacts.json in Resources */,
 				2071C4D12229809C0038C299 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

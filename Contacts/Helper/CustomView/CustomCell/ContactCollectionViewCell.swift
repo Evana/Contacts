@@ -92,7 +92,7 @@ class ContactCollectionViewCell: UICollectionViewCell {
         view.addSubview(nameLabel)
         view.addSubview(emailLabel)
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 10).isActive = true
+        nameLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 7).isActive = true
         nameLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20).isActive = true
         nameLabel.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor, constant:-10).isActive = true
         nameLabel.font = UIFont.preferredFont(forTextStyle: .body)
