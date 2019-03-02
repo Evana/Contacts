@@ -12,10 +12,11 @@ class ContactListViewModel {
     let contactService: ContactServiceProtocol
     var contacts: [Contact]?
     
-    private var cellCount = 0
+    private var allCellCount = 0
+    private var favoriteCellCount = 0
 
     var numberOfCells: Int {
-        return cellCount
+        return isFavorite ? favoriteCellCount : allCellCount
     }
     
     var isLoading: Bool = false {
@@ -30,8 +31,20 @@ class ContactListViewModel {
         }
     }
     
-    private var cellViewModels: [ContactCellViewModel] = [ContactCellViewModel]() {
+    private var cellViewModels: [ContactCellViewModel]? {
         didSet {
+            self.reloadCollectionViewClosure?()
+        }
+    }
+    
+    private var favoriteCellViewCodels:[ContactCellViewModel]?
+
+    var isFavorite = false {
+        didSet {
+            if isFavorite {
+                favoriteCellViewCodels = cellViewModels?.filter { $0.isFavorite == true }
+                favoriteCellCount = favoriteCellViewCodels?.count ?? 0
+            }
             self.reloadCollectionViewClosure?()
         }
     }
@@ -43,7 +56,6 @@ class ContactListViewModel {
     init( contactService: ContactServiceProtocol = ContactService()) {
         self.contactService = contactService
     }
-    
     
     func fetchContact() {
         self.isLoading = true
@@ -69,7 +81,7 @@ class ContactListViewModel {
             viewModels.append(createCellViewModel(contact: contact))
         }
         
-        cellCount = viewModels.count > 20 ? 20 : viewModels.count
+        allCellCount = viewModels.count > 20 ? 20 : viewModels.count
         cellViewModels = viewModels
     }
     
@@ -77,10 +89,16 @@ class ContactListViewModel {
         return ContactCellViewModel(avatarImage: contact.gender == .male ? "male_avatar" : "female_avatar", name: "\(contact.firstName) \(contact.lastName)", email: contact.email, isFavorite: contact.isFavorite)
     }
     
-    func getCellViewModel( at indexPath: IndexPath ) -> ContactCellViewModel {
-        return cellViewModels[indexPath.row]
+    func getCellViewModel( at indexPath: IndexPath ) -> ContactCellViewModel? {
+        return isFavorite ? favoriteCellViewCodels?[indexPath.row] : cellViewModels?[indexPath.row]
     }
-
+    
+    func updateFavorite(for indexPath: IndexPath) {
+        if let isfavorite = contacts?[indexPath.row].isFavorite {
+            contacts?[indexPath.row].isFavorite = !isfavorite
+            cellViewModels?[indexPath.row].isFavorite = !isfavorite
+        }
+    }
 }
 
 struct ContactCellViewModel {

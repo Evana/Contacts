@@ -15,6 +15,7 @@ class CustomUIButton: UIButton {
     override var isEnabled: Bool {
         didSet {
             setBackgroundForEnabled(isEnabled)
+            setAlphaForEnabled(isEnabled)
         }
     }
     
@@ -48,5 +49,9 @@ class CustomUIButton: UIButton {
     
     private func setBackgroundForEnabled(_ isEnabled: Bool) {
         self.backgroundColor = isEnabled ? color : .gray
+    }
+    
+    private func setAlphaForEnabled(_ isEnabled: Bool) {
+        self.alpha = isEnabled ? 1.0 : 0.3
     }
 }
