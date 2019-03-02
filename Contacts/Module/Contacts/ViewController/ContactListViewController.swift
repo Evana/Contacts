@@ -115,6 +115,7 @@ class ContactListViewController: CollectionViewController {
         showMoreButton.widthAnchor.constraint(equalToConstant: 260).isActive = true
         showMoreButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
         showMoreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        showMoreButton.addTarget(self, action: #selector(showMore(_:)), for: .touchUpInside)
     }
     
     private func setupCollectionView() {
@@ -186,6 +187,10 @@ class ContactListViewController: CollectionViewController {
         default:
             break
         }
+    }
+    
+    @IBAction func showMore(_ sender: UIButton) {
+        sender.isEnabled = contactListViewModel.loadMoreCell()
     }
     
 }
