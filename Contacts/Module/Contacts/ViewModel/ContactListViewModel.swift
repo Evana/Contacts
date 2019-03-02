@@ -85,7 +85,7 @@ class ContactListViewModel {
         cellViewModels = viewModels
     }
     
-    private func createCellViewModel( contact: Contact ) -> ContactCellViewModel {
+    func createCellViewModel( contact: Contact ) -> ContactCellViewModel {
         return ContactCellViewModel(avatarImage: contact.gender == .male ? "male_avatar" : "female_avatar", name: "\(contact.firstName) \(contact.lastName)", email: contact.email, isFavorite: contact.isFavorite)
     }
     
