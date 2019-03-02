@@ -74,8 +74,7 @@ class ContactListViewModel {
     }
     
     private func createCellViewModel( contact: Contact ) -> ContactCellViewModel {
-        #warning("Need to put Avatar image")
-        return ContactCellViewModel(avatarImage: contact.gender.rawValue, name: "\(contact.firstName) \(contact.lastName)", email: contact.email, isFavorite: contact.isFavorite)
+        return ContactCellViewModel(avatarImage: contact.gender == .male ? "male_avatar" : "female_avatar", name: "\(contact.firstName) \(contact.lastName)", email: contact.email, isFavorite: contact.isFavorite)
     }
     
     func getCellViewModel( at indexPath: IndexPath ) -> ContactCellViewModel {
