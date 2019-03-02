@@ -99,6 +99,18 @@ class ContactListViewModel {
             cellViewModels?[indexPath.row].isFavorite = !isfavorite
         }
     }
+    
+    func loadMoreCell() -> Bool {
+        guard let viewModels = cellViewModels else { return false }
+        allCellCount += 20
+        var isEnabled = true
+        if allCellCount > viewModels.count {
+            allCellCount = viewModels.count
+            isEnabled = false
+        }
+        self.reloadCollectionViewClosure?()
+        return isEnabled
+    }
 }
 
 struct ContactCellViewModel {
