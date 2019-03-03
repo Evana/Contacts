@@ -30,6 +30,7 @@ class ContactListViewController: CollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.title = "Contacts"
         initialiseViewModel()
     }
     
