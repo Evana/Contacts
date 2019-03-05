@@ -80,9 +80,9 @@ class ContactListViewModel {
         for contact in contacts {
             viewModels.append(createCellViewModel(contact: contact))
         }
-        
+        let sortedContacts = viewModels.sorted { $0.name < $1.name }
         allCellCount = viewModels.count > 20 ? 20 : viewModels.count
-        cellViewModels = viewModels
+        cellViewModels = sortedContacts
     }
     
     func createCellViewModel( contact: Contact ) -> ContactCellViewModel {
