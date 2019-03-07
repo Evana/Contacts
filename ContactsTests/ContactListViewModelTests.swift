@@ -48,7 +48,8 @@ class ContactListViewModelTests: XCTestCase {
         fetchContactFinish()
         let indexPath = IndexPath(row: 0, section: 0)
         let cellViewModel = contactListViewModel?.getCellViewModel(at: indexPath)
-        let contact = mockService?.contacts[indexPath.row]
+        let sortedContacts = mockService?.contacts.sorted{ $0.firstName < $1.firstName }
+        let contact = sortedContacts?[indexPath.row]
         XCTAssertEqual(cellViewModel?.name, "\(contact!.firstName) \(contact!.lastName)" )
     }
     
