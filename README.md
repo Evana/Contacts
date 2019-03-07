@@ -8,6 +8,9 @@ This app will dowload a list of contacts from the following endpoint https://gis
 - Layout done programetically now(have a plan to use snapkit)
 
 This project is still in development, any suggestion would really appriciated.
+
+TODO: Need to add UT for ViewModel
+
 <br />
 
 
