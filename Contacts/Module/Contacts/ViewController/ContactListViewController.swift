@@ -25,7 +25,7 @@ class ContactListViewController: CollectionViewController {
     }()
     
     var gridWith: CGFloat {
-        return self.traitCollection.horizontalSizeClass == .regular ? ApplicationWindowSize.windowSize.width - 20 : (UIDevice.current.orientation == .portrait ? ApplicationWindowSize.windowSize.width - 20 : ApplicationWindowSize.windowSize.width/2 + 10)
+        return self.traitCollection.horizontalSizeClass == .regular ? UIScreen.main.bounds.size.width - 20 : (UIDevice.current.orientation == .portrait ? UIScreen.main.bounds.size.width - 20 : UIScreen.main.bounds.size.width/2 + 10)
     }
     
     override func viewDidLoad() {
@@ -125,8 +125,8 @@ class ContactListViewController: CollectionViewController {
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
         
         layout.itemSize =  self.traitCollection.horizontalSizeClass == .regular ?
-            CGSize(width: ApplicationWindowSize.windowSize.width/2 - 20, height:  250)
-            : CGSize(width: ApplicationWindowSize.windowSize.width - 20, height:  250)
+            CGSize(width: UIScreen.main.bounds.size.width/2 - 20, height:  250)
+            : CGSize(width: UIScreen.main.bounds.size.width - 20, height:  250)
         
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.dataSource = self

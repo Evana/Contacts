@@ -9,7 +9,8 @@
 import Foundation
 
 class ContactListViewModel {
-    let contactService: ContactServiceProtocol
+    
+    static let apiUrl = "https://gist.githubusercontent.com/pokeytc/e8c52af014cf80bc1b217103bbe7e9e4/raw/4bc01478836ad7f1fb840f5e5a3c24ea654422f7/contacts.json"
     var contacts: [Contact]?
     
     private var allCellCount = 0
@@ -52,24 +53,19 @@ class ContactListViewModel {
     var showAlertClosure: (()->())?
     var updateLoadingStatus: (()->())?
     var reloadCollectionViewClosure: (()->())?
-
-    init( contactService: ContactServiceProtocol = ContactService()) {
-        self.contactService = contactService
-    }
     
     func fetchContact() {
         self.isLoading = true
-        contactService.fetchContacts { [weak self] success, contacts, error in
+        ContactService.fetchContacts(url: ContactListViewModel.apiUrl){ [weak self] result in
             guard let self = self else { return }
             self.isLoading = false
-            if let error = error {
-                self.alertMessage = error.localizedDescription
-            } else {
-                guard let contacts = contacts else {
-                    self.alertMessage = "Something went wrong"
-                    return
-                }
+            switch result {
+            case .success(let contacts):
                 self.processContacts(contacts: contacts)
+            case .failure(let error): do {
+                self.alertMessage = error.debugDescription
+                
+                }
             }
         }
     }
@@ -81,7 +77,8 @@ class ContactListViewModel {
             viewModels.append(createCellViewModel(contact: contact))
         }
         let sortedContacts = viewModels.sorted { $0.name < $1.name }
-        allCellCount = viewModels.count > 20 ? 20 : viewModels.count
+        allCellCount = viewModels.count > 20 ? 20 : viewModels.count  // Show 20 contacts at first
+
         cellViewModels = sortedContacts
     }
     
@@ -100,6 +97,7 @@ class ContactListViewModel {
         }
     }
     
+    // Show 20 more contacts
     func loadMoreCell() -> Bool {
         guard let viewModels = cellViewModels else { return false }
         allCellCount += 20
