@@ -5,6 +5,8 @@ This app will dowload a list of contacts from the following endpoint https://gis
 - Use NSUrslSession to download data
 - Use size classes functionality to determine if the device is in Horizontal size class is Regular or Compact
 - Use CollectionView to show data in different layout
+
+This project is still in development, any suggestion would really appriciated.
 <br />
 
 
@@ -15,5 +17,10 @@ This app will dowload a list of contacts from the following endpoint https://gis
 
 - When the device trait collection horizontal size class is Regular the app will show data as following
 ![Alt text](/ScreenShot/landscape.png?raw=true "Optional Title")
+
+# Installing
+- This project is written in swift 4.2
+- Minimum deployment target 9.0.
+- works in both iPhone/iPad.
 
 
