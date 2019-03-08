@@ -11,12 +11,15 @@ import XCTest
 
 class ContactsServiceTests: XCTestCase {
 
-    
+    var contactService: ContactService?
+
     override func setUp() {
         super.setUp()
+        contactService = ContactService()
     }
     
     override func tearDown() {
+        contactService = nil
         super.tearDown()
     }
     
@@ -24,7 +27,7 @@ class ContactsServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "callBack")
         let fetchExpectation = XCTestExpectation(description: "fetchContacts")
         
-        ContactService.fetchContacts(url: ContactListViewModel.apiUrl) { result in
+        contactService?.fetchContacts(url: ContactListViewModel.apiUrl) { result in
             expectation.fulfill()
             switch result {
             case .success(let contacts):

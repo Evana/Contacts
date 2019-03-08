@@ -13,6 +13,9 @@ class ContactListViewModel {
     static let apiUrl = "https://gist.githubusercontent.com/pokeytc/e8c52af014cf80bc1b217103bbe7e9e4/raw/4bc01478836ad7f1fb840f5e5a3c24ea654422f7/contacts.json"
     var contacts: [Contact]?
     
+    let contactService: ContactServiceManager
+    
+    
     private var allCellCount = 0
     private var favoriteCellCount = 0
 
@@ -54,9 +57,13 @@ class ContactListViewModel {
     var updateLoadingStatus: (()->())?
     var reloadCollectionViewClosure: (()->())?
     
+    init(contactService: ContactServiceManager = ContactService()) {
+        self.contactService = contactService
+    }
+    
     func fetchContact() {
         self.isLoading = true
-        ContactService.fetchContacts(url: ContactListViewModel.apiUrl){ [weak self] result in
+        contactService.fetchContacts(url: ContactListViewModel.apiUrl){ [weak self] result in
             guard let self = self else { return }
             self.isLoading = false
             switch result {
