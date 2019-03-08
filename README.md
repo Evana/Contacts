@@ -12,6 +12,7 @@ This project is still in development, any suggestion would really appriciated.
 
 # TODO: 
 - Need to remove constraints warning
+- Can apply snapkit for programmetic layout
 
 # Ouput Screen
 <br />
