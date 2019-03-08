@@ -42,7 +42,7 @@ extension Result: CustomStringConvertible, CustomDebugStringConvertible {
 protocol ServiceManager {}
 
 extension ServiceManager {
-    static func responseData(urlString: String,
+    func responseData(urlString: String,
                              completion: @escaping (Result<Data, CustomError>) -> Void) {
         if let url = URL(string: urlString) {
             URLSession.shared.dataTask(with: URLRequest(url: url)) {(data, response, error) in
@@ -65,7 +65,7 @@ extension ServiceManager {
         }
     }
     
-    static func responseObject<T: Decodable>(urlString: String,
+    func responseObject<T: Decodable>(urlString: String,
                                              completion: @escaping (Result<T, CustomError>) -> Void) {
         // T is any type which can be decodable to convert the response from backend.
         responseData(urlString: urlString,

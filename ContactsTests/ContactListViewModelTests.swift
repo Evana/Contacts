@@ -11,12 +11,12 @@ import XCTest
 class ContactListViewModelTests: XCTestCase {
 
     var contactListViewModel: ContactListViewModel?
-    var mockService: MockApiService?
+    var mockService: MockContactService?
     
     override func setUp() {
         super.setUp()
-        mockService = MockApiService()
-        contactListViewModel = ContactListViewModel()
+        mockService = MockContactService()
+        contactListViewModel = ContactListViewModel(contactService: mockService!)
         contactListViewModel?.fetchContact()
         
     }
@@ -27,13 +27,13 @@ class ContactListViewModelTests: XCTestCase {
         super.tearDown()
     }
     
-    func testFetchPhotos() {
+    func testFetchContact() {
         contactListViewModel?.fetchContact()
         XCTAssert(mockService!.isfetchContactCalled , "Fetched successfully")
     }
     
-    func testFetchPhotoFail() {
-        let error = NSError(domain:"", code:401, userInfo:[ NSLocalizedDescriptionKey: "Failed to fetch contacts"])
+    func testFetchContactFail() {
+        let error = CustomError.noNetwork 
         contactListViewModel?.fetchContact()
         mockService?.fetchFail(error:.system(error: error))
         XCTAssertEqual(self.contactListViewModel?.alertMessage, error.debugDescription)
@@ -63,13 +63,13 @@ class ContactListViewModelTests: XCTestCase {
     }
 }
 
-class MockApiService: ContactServiceManager {
+class MockContactService: ContactServiceManager {
     
     var isfetchContactCalled = false
     var contacts = [Contact]()
     var completeClouser: ((Result<[Contact], CustomError>) -> ())?
     
-    func fetchContacts(completion: @escaping ((Result<[Contact], CustomError>) -> ())){
+    func fetchContacts(url: String, completion: @escaping (Result<[Contact], CustomError>) -> ()) {
         isfetchContactCalled = true
         completeClouser = completion
     }
