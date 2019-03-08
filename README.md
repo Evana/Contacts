@@ -11,8 +11,7 @@ This app will dowload a list of contacts from the following endpoint https://gis
 This project is still in development, any suggestion would really appriciated.
 
 # TODO: 
-- Need to add UT for ViewModel
-- Improve code with dependency injection for mocking
+- Need to remove constraints warning
 
 # Ouput Screen
 <br />
