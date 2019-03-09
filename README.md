@@ -5,8 +5,7 @@ This app will dowload a list of contacts from the following endpoint https://gis
 - Use NSUrslSession to download data
 - Use size classes functionality to determine if the device is in Horizontal size class is Regular or Compact
 - Use CollectionView to show data in different layout
-- Layout done programetically now(have a plan to use snapkit)
-
+- Layout done programetically using snapkit
 This project is still in development, any suggestion would really appriciated.
 
 # TODO: 
