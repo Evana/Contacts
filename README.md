@@ -17,7 +17,7 @@ This project is still in development, any suggestion would really appriciated.
 
 
 - When the device trait collection horizontal size class is Compact the app will show data as following
-![Alt text](/ScreenShot/potrait.png?raw=true "Optional Title")
+![Alt text](/ScreenShot/portrait.png?raw=true "Optional Title")
 <br />
 <br />
 
