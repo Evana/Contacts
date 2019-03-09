@@ -11,8 +11,7 @@ This app will dowload a list of contacts from the following endpoint https://gis
 This project is still in development, any suggestion would really appriciated.
 
 # TODO: 
-- Need to remove constraints warning
-- Can apply snapkit for programmetic layout
+- Need to update layout
 
 # Ouput Screen
 <br />
