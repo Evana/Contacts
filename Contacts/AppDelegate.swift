@@ -17,8 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let navController = UINavigationController()
         navController.navigationBar.barTintColor = .white
-        let titleDict = [NSAttributedString.Key.foregroundColor: UIColor.gray]
+        let titleDict = [NSAttributedString.Key.foregroundColor: UIColor.black]
         navController.navigationBar.titleTextAttributes = titleDict
+        navController.navigationBar.isTranslucent = false
         let mainView = ContactListViewController(nibName: nil, bundle: nil)
         navController.viewControllers = [mainView]
         self.window!.rootViewController = navController

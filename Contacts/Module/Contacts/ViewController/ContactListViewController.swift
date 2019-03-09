@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ContactListViewController: CollectionViewController {
     
@@ -14,9 +15,23 @@ class ContactListViewController: CollectionViewController {
     let buttonTitle = "Show More"
     let cellReuseIdentifier = "contactCell"
     
-    var segmentedControl: UISegmentedControl!
-    var showMoreButton: CustomUIButton!
-    var activityIndicator: UIActivityIndicatorView!
+    lazy var segmentedControl: UISegmentedControl! = {
+        let items = ["All" , "Favorites"]
+        let segmentedControl = UISegmentedControl(items : items)
+        segmentedControl.selectedSegmentIndex = 0
+        segmentedControl.layer.cornerRadius = 5.0
+        segmentedControl.frame = CGRect.zero
+        segmentedControl.tintColor = componentColor
+        return segmentedControl
+    }()
+    
+    lazy var activityIndicator: UIActivityIndicatorView! = {
+        var indicator = UIActivityIndicatorView(style: .whiteLarge)
+        indicator.hidesWhenStopped = true
+        indicator.color = .gray
+        indicator.center = view.center
+        return indicator
+    }()
     
     var flowLayout: ContactCollectionViewFlowLayout!
 
@@ -32,14 +47,8 @@ class ContactListViewController: CollectionViewController {
         super.viewDidLoad()
         self.title = "Contacts"
         initialiseViewModel()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        setupSegmentControl()
-        setupCollectionView()
-        setupShowMoreButton()
-        setupActivityIndicator()
+        setupView()
+
     }
     
     override func viewDidLayoutSubviews() {
@@ -47,6 +56,44 @@ class ContactListViewController: CollectionViewController {
         updateSizeClassesLayout()
         collectionView.collectionViewLayout.invalidateLayout()
         view.layoutIfNeeded()
+        
+    }
+    
+    private func setupView() {
+        view.backgroundColor = .white
+        
+        //ActivityIndicator
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints{ make in
+            make.centerX.equalTo(self.view)
+            make.centerY.equalTo(self.view)
+        }
+        activityIndicator.startAnimating()
+        
+        //SegmentControl
+        view.addSubview(segmentedControl)
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(self.view).offset(0)
+            make.width.equalTo(300)
+            make.height.equalTo(35)
+            make.centerX.equalTo(view.snp.centerX)
+        }
+        segmentedControl.addTarget(self, action: #selector(ContactListViewController.indexChanged(_:)), for: .valueChanged)
+
+        
+        //CollectionView
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ContactCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        collectionView.backgroundColor = .white
+        view.addSubview(collectionView!)
+        
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo((segmentedControl?.snp.bottom)!)
+            make.left.equalTo(view).offset(0)
+            make.right.equalTo(view).offset(0)
+            make.bottom.equalTo(view).offset(0)
+        }
         
     }
     
@@ -58,91 +105,7 @@ class ContactListViewController: CollectionViewController {
         }
     }
     
-    private func setupActivityIndicator() {
-        activityIndicator = UIActivityIndicatorView(style: .whiteLarge)
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.color = .gray
-        activityIndicator.center = view.center
-        activityIndicator.startAnimating()
-        self.view.addSubview(activityIndicator)
-    }
-    
-    private func setupSegmentControl() {
-        view.backgroundColor = .white
-        let items = ["All" , "Favorites"]
-        segmentedControl = UISegmentedControl(items : items)
-        segmentedControl.selectedSegmentIndex = 0
-        segmentedControl.layer.cornerRadius = 5.0
-        let frame = UIScreen.main.bounds
-        segmentedControl.frame = CGRect(x: frame.minX + 10, y: 10,
-                                        width: frame.width - 40, height: 50)
-        segmentedControl.translatesAutoresizingMaskIntoConstraints = false
-        segmentedControl.tintColor = componentColor
-        view.addSubview(segmentedControl)
-        
-        if #available(iOS 11.0, *) {
-            let guide = self.view.safeAreaLayoutGuide
-            segmentedControl.trailingAnchor.constraint(equalTo: guide.trailingAnchor, constant: -30).isActive = true
-            segmentedControl.leadingAnchor.constraint(equalTo: guide.leadingAnchor, constant: 30).isActive = true
-            segmentedControl.topAnchor.constraint(equalTo: guide.topAnchor, constant: 10).isActive = true
-        } else {
-            NSLayoutConstraint(item: segmentedControl,
-                               attribute: .top,
-                               relatedBy: .equal,
-                               toItem: view, attribute: .top,
-                               multiplier: 1.0, constant: 10).isActive = true
-            NSLayoutConstraint(item: segmentedControl,
-                               attribute: .leading,
-                               relatedBy: .equal, toItem: view,
-                               attribute: .leading,
-                               multiplier: 1.0,
-                               constant: 30).isActive = true
-            NSLayoutConstraint(item: segmentedControl, attribute: .trailing,
-                               relatedBy: .equal,
-                               toItem: view,
-                               attribute: .trailing,
-                               multiplier: 1.0,
-                               constant: -30).isActive = true
-        }
-        segmentedControl.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        segmentedControl.addTarget(self, action: #selector(ContactListViewController.indexChanged(_:)), for: .valueChanged)
-    }
-    
-    func setupShowMoreButton() {
-        showMoreButton = CustomUIButton(buttonTitle, for: .normal)
-        view.addSubview(showMoreButton)
-        showMoreButton.translatesAutoresizingMaskIntoConstraints = false
-        showMoreButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -20).isActive = true
-        showMoreButton.widthAnchor.constraint(equalToConstant: 260).isActive = true
-        showMoreButton.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        showMoreButton.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        showMoreButton.addTarget(self, action: #selector(showMore(_:)), for: .touchUpInside)
-        showMoreButton.isHidden = true
-    }
-    
-    private func setupCollectionView() {
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        
-        layout.itemSize =  self.traitCollection.horizontalSizeClass == .regular ?
-            CGSize(width: UIScreen.main.bounds.size.width/2 - 20, height:  250)
-            : CGSize(width: UIScreen.main.bounds.size.width - 20, height:  250)
-        
-        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(ContactCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-        collectionView.backgroundColor = .white
-        self.view.addSubview(collectionView!)
-        collectionView.translatesAutoresizingMaskIntoConstraints = false
-        collectionView.topAnchor.constraint(equalTo: segmentedControl.bottomAnchor, constant: 5).isActive = true
-        collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-    }
-    
     func initialiseViewModel() {
-        
         contactListViewModel.showAlertClosure = { [weak self]  in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -167,7 +130,6 @@ class ContactListViewController: CollectionViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
-                self.showMoreButton.isHidden = false
             }
         }
         contactListViewModel.fetchContact()
@@ -183,17 +145,11 @@ class ContactListViewController: CollectionViewController {
         switch sender.selectedSegmentIndex{
         case 0:
             contactListViewModel.isFavorite = false
-            showMoreButton.isEnabled = true
         case 1:
             contactListViewModel.isFavorite = true
-            showMoreButton.isEnabled = false
         default:
             break
         }
-    }
-    
-    @IBAction func showMore(_ sender: UIButton) {
-        sender.isEnabled = contactListViewModel.loadMoreCell()
     }
     
 }

@@ -10,7 +10,16 @@ import UIKit
 
 class CollectionViewController: UIViewController {
     
-    var collectionView: UICollectionView!
+    lazy var collectionView: UICollectionView! = {
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        
+        layout.itemSize =  self.traitCollection.horizontalSizeClass == .regular ?
+            CGSize(width: UIScreen.main.bounds.size.width/2 - 20, height:  250)
+            : CGSize(width: UIScreen.main.bounds.size.width - 20, height:  250)
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        return collectionView
+    }()
     
     private var currentIndexPath: IndexPath?
     
@@ -25,12 +34,10 @@ class CollectionViewController: UIViewController {
     
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
         if previousTraitCollection != nil {
-            
             collectionView.reloadData()
         }
-        super.traitCollectionDidChange(previousTraitCollection)
-        
         if let currentIndexPath = currentIndexPath {
             collectionView.scrollToItem(at: currentIndexPath as IndexPath, at: .centeredVertically, animated: false)
             self.currentIndexPath = nil

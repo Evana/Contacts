@@ -15,7 +15,6 @@ class ContactListViewModel {
     
     let contactService: ContactServiceManager
     
-    
     private var allCellCount = 0
     private var favoriteCellCount = 0
 
@@ -84,8 +83,7 @@ class ContactListViewModel {
             viewModels.append(createCellViewModel(contact: contact))
         }
         let sortedContacts = viewModels.sorted { $0.name < $1.name }
-        allCellCount = viewModels.count > 20 ? 20 : viewModels.count  // Show 20 contacts at first
-
+        allCellCount = viewModels.count 
         cellViewModels = sortedContacts
     }
     
@@ -102,19 +100,6 @@ class ContactListViewModel {
             contacts?[indexPath.row].isFavorite = !isfavorite
             cellViewModels?[indexPath.row].isFavorite = !isfavorite
         }
-    }
-    
-    // Show 20 more contacts
-    func loadMoreCell() -> Bool {
-        guard let viewModels = cellViewModels else { return false }
-        allCellCount += 20
-        var isEnabled = true
-        if allCellCount > viewModels.count {
-            allCellCount = viewModels.count
-            isEnabled = false
-        }
-        self.reloadCollectionViewClosure?()
-        return isEnabled
     }
 }
 
