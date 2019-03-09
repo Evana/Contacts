@@ -6,7 +6,6 @@ This app will dowload a list of contacts from the following endpoint https://gis
 - Use size classes functionality to determine if the device is in Horizontal size class is Regular or Compact
 - Use CollectionView to show data in different layout
 - Layout done programetically now(have a plan to use snapkit)
-- Show 20 contacts in first load and "Show More" button click will load another 20 until all data loaded.
 
 This project is still in development, any suggestion would really appriciated.
 
