@@ -12,7 +12,6 @@ This project is still in development, any suggestion would really appriciated.
 - Update layout
 - Store data locally with Realm
 
-
 # Ouput Screen
 <br />
 
