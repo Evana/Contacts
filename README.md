@@ -13,9 +13,6 @@ This project is still in development, any suggestion would really appriciated.
 - Store data locally with Realm
 
 # Ouput Screen
-<br />
-
-
 - When the device trait collection horizontal size class is Compact the app will show data as following
 ![Alt text](/ScreenShot/portrait.png?raw=true "Optional Title")
 <br />
