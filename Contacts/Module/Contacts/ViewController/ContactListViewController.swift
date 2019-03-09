@@ -22,14 +22,26 @@ class ContactListViewController: CollectionViewController {
         segmentedControl.layer.cornerRadius = 5.0
         segmentedControl.frame = CGRect.zero
         segmentedControl.tintColor = componentColor
+        view.addSubview(segmentedControl)
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(self.view).offset(0)
+            make.width.equalTo(300)
+            make.height.equalTo(35)
+            make.centerX.equalTo(view.snp.centerX)
+        }
+        segmentedControl.addTarget(self, action: #selector(ContactListViewController.indexChanged(_:)), for: .valueChanged)
         return segmentedControl
     }()
     
     lazy var activityIndicator: UIActivityIndicatorView! = {
-        var indicator = UIActivityIndicatorView(style: .whiteLarge)
+        let indicator = UIActivityIndicatorView(style: .whiteLarge)
         indicator.hidesWhenStopped = true
         indicator.color = .gray
-        indicator.center = view.center
+        view.addSubview(indicator)
+        indicator.snp.makeConstraints{ make in
+            make.centerX.equalTo(self.view)
+            make.centerY.equalTo(self.view)
+        }
         return indicator
     }()
     
@@ -63,24 +75,7 @@ class ContactListViewController: CollectionViewController {
         view.backgroundColor = .white
         
         //ActivityIndicator
-        view.addSubview(activityIndicator)
-        activityIndicator.snp.makeConstraints{ make in
-            make.centerX.equalTo(self.view)
-            make.centerY.equalTo(self.view)
-        }
         activityIndicator.startAnimating()
-        
-        //SegmentControl
-        view.addSubview(segmentedControl)
-        segmentedControl.snp.makeConstraints { make in
-            make.top.equalTo(self.view).offset(0)
-            make.width.equalTo(300)
-            make.height.equalTo(35)
-            make.centerX.equalTo(view.snp.centerX)
-        }
-        segmentedControl.addTarget(self, action: #selector(ContactListViewController.indexChanged(_:)), for: .valueChanged)
-
-        
         //CollectionView
         collectionView.dataSource = self
         collectionView.delegate = self
