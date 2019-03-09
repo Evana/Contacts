@@ -11,7 +11,9 @@ This app will dowload a list of contacts from the following endpoint https://gis
 This project is still in development, any suggestion would really appriciated.
 
 # TODO: 
-- Need to update layout
+- Update layout
+- Store data locally with Realm
+
 
 # Ouput Screen
 <br />
