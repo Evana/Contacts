@@ -9,10 +9,9 @@
 import UIKit
 import SnapKit
 
-class ContactListViewController: CollectionViewController {
+class ContactListViewController: UIViewController {
     
     let componentColor =  UIColor.init(red: 46.0/255.0, green: 172.0/255.0, blue: 246.0/255.0, alpha: 1.0)
-    let buttonTitle = "Show More"
     let cellReuseIdentifier = "contactCell"
     
     lazy var segmentedControl: UISegmentedControl! = {
@@ -32,6 +31,31 @@ class ContactListViewController: CollectionViewController {
         segmentedControl.addTarget(self, action: #selector(ContactListViewController.indexChanged(_:)), for: .valueChanged)
         return segmentedControl
     }()
+    
+    lazy var collectionView: UICollectionView! = {
+        
+        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
+        
+        layout.itemSize =  self.traitCollection.horizontalSizeClass == .regular ?
+            CGSize(width: UIScreen.main.bounds.size.width/2 - 20, height:  250)
+            : CGSize(width: UIScreen.main.bounds.size.width - 20, height:  250)
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(ContactCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
+        collectionView.backgroundColor = .white
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo((segmentedControl?.snp.bottom)!)
+            make.left.equalTo(view).offset(0)
+            make.right.equalTo(view).offset(0)
+            make.bottom.equalTo(view).offset(0)
+        }
+        return collectionView
+    }()
+    
+    private var currentIndexPath: IndexPath?
     
     lazy var activityIndicator: UIActivityIndicatorView! = {
         let indicator = UIActivityIndicatorView(style: .whiteLarge)
@@ -73,23 +97,7 @@ class ContactListViewController: CollectionViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        
-        //ActivityIndicator
         activityIndicator.startAnimating()
-        //CollectionView
-        collectionView.dataSource = self
-        collectionView.delegate = self
-        collectionView.register(ContactCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
-        collectionView.backgroundColor = .white
-        view.addSubview(collectionView!)
-        
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo((segmentedControl?.snp.bottom)!)
-            make.left.equalTo(view).offset(0)
-            make.right.equalTo(view).offset(0)
-            make.bottom.equalTo(view).offset(0)
-        }
-        
     }
     
     func updateSizeClassesLayout() {
@@ -179,6 +187,32 @@ extension ContactListViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return flowLayout.collectionView(collectionView, layout: collectionViewLayout, minimumInteritemSpacingForSectionAt: section)
+    }
+    
+}
+
+extension ContactListViewController {
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        let visibleIndexPaths = collectionView.indexPathsForVisibleItems
+        if visibleIndexPaths.count > 0 {
+            currentIndexPath = visibleIndexPaths[visibleIndexPaths.count / 2]
+        }
+        collectionView.collectionViewLayout.invalidateLayout()
+    }
+    
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if previousTraitCollection != nil {
+            collectionView.reloadData()
+        }
+        if let currentIndexPath = currentIndexPath {
+            collectionView.scrollToItem(at: currentIndexPath as IndexPath, at: .centeredVertically, animated: false)
+            self.currentIndexPath = nil
+        }
+        collectionView.collectionViewLayout.invalidateLayout()
     }
     
 }
