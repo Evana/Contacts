@@ -11,6 +11,7 @@ This project is still in development, any suggestion would really appriciated.
 # TODO: 
 - Update layout
 - Store data locally with Realm
+- Fix bug for visible index in collectionView
 
 # Ouput Screen
 - When the device trait collection horizontal size class is Compact the app will show data as following
