@@ -24,7 +24,6 @@
 		2071C4EE222984490038C299 /* ContactService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4ED222984490038C299 /* ContactService.swift */; };
 		2071C4F4222986A80038C299 /* ContactListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4F3222986A80038C299 /* ContactListViewModel.swift */; };
 		2071C4FB22298E100038C299 /* ContactListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4FA22298E100038C299 /* ContactListViewController.swift */; };
-		2071C50022298EB90038C299 /* CollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2071C4FF22298EB90038C299 /* CollectionViewController.swift */; };
 		60F7DE75457D9B0346E4CA6C /* Pods_ContactsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E92BF8725A90889FACF3A1B /* Pods_ContactsTests.framework */; };
 		6964A459DA3D91AB7995CEDF /* Pods_Contacts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A2E4E147E3613B47C7B9A75D /* Pods_Contacts.framework */; };
 /* End PBXBuildFile section */
@@ -66,7 +65,6 @@
 		2071C4ED222984490038C299 /* ContactService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactService.swift; sourceTree = "<group>"; };
 		2071C4F3222986A80038C299 /* ContactListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewModel.swift; sourceTree = "<group>"; };
 		2071C4FA22298E100038C299 /* ContactListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactListViewController.swift; sourceTree = "<group>"; };
-		2071C4FF22298EB90038C299 /* CollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewController.swift; sourceTree = "<group>"; };
 		A2E4E147E3613B47C7B9A75D /* Pods_Contacts.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Contacts.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -232,7 +230,6 @@
 		2071C4FE22298E7A0038C299 /* CollectionViewLayout */ = {
 			isa = PBXGroup;
 			children = (
-				2071C4FF22298EB90038C299 /* CollectionViewController.swift */,
 				205A7C1322298FB200F28112 /* ContactCollectionViewFlowLayout.swift */,
 				205A7C1522298FF000F28112 /* CollectionViewSizeClass.swift */,
 				205A7C172229903900F28112 /* ContactCollectionViewGridLayout.swift */,
@@ -430,7 +427,6 @@
 				2016B983223126CA00C93ED7 /* CustomError.swift in Sources */,
 				205A7C1E2229943A00F28112 /* CustomUIButton.swift in Sources */,
 				205A7C1422298FB200F28112 /* ContactCollectionViewFlowLayout.swift in Sources */,
-				2071C50022298EB90038C299 /* CollectionViewController.swift in Sources */,
 				2071C4EE222984490038C299 /* ContactService.swift in Sources */,
 				2016B981223120FA00C93ED7 /* ServiceManager.swift in Sources */,
 				2071C4FB22298E100038C299 /* ContactListViewController.swift in Sources */,
