@@ -24,19 +24,19 @@ class ContactListViewModel {
     
     var isLoading: Bool = false {
         didSet {
-            self.updateLoadingStatus?()
+            updateLoadingStatus?()
         }
     }
     
     var alertMessage: String? {
         didSet {
-            self.showAlertClosure?()
+            showAlertClosure?()
         }
     }
     
     private var cellViewModels: [ContactCellViewModel]? {
         didSet {
-            self.reloadCollectionViewClosure?()
+            reloadCollectionViewClosure?()
         }
     }
     
@@ -48,7 +48,7 @@ class ContactListViewModel {
                 favoriteCellViewCodels = cellViewModels?.filter { $0.isFavorite == true }
                 favoriteCellCount = favoriteCellViewCodels?.count ?? 0
             }
-            self.reloadCollectionViewClosure?()
+            reloadCollectionViewClosure?()
         }
     }
     
@@ -61,7 +61,7 @@ class ContactListViewModel {
     }
     
     func fetchContact() {
-        self.isLoading = true
+        isLoading = true
         contactService.fetchContacts(url: ContactListViewModel.apiUrl){ [weak self] result in
             guard let self = self else { return }
             self.isLoading = false

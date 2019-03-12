@@ -21,37 +21,20 @@ class ContactListViewController: UIViewController {
         segmentedControl.layer.cornerRadius = 5.0
         segmentedControl.frame = CGRect.zero
         segmentedControl.tintColor = componentColor
-        view.addSubview(segmentedControl)
-        segmentedControl.snp.makeConstraints { make in
-            make.top.equalTo(self.view).offset(0)
-            make.width.equalTo(300)
-            make.height.equalTo(35)
-            make.centerX.equalTo(view.snp.centerX)
-        }
-        segmentedControl.addTarget(self, action: #selector(ContactListViewController.indexChanged(_:)), for: .valueChanged)
         return segmentedControl
     }()
     
     lazy var collectionView: UICollectionView! = {
-        
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 20, left: 10, bottom: 10, right: 10)
-        
         layout.itemSize =  self.traitCollection.horizontalSizeClass == .regular ?
             CGSize(width: UIScreen.main.bounds.size.width/2 - 20, height:  250)
             : CGSize(width: UIScreen.main.bounds.size.width - 20, height:  250)
         let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         collectionView.dataSource = self
         collectionView.delegate = self
-        collectionView.register(ContactCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         collectionView.backgroundColor = .white
-        view.addSubview(collectionView)
-        collectionView.snp.makeConstraints { make in
-            make.top.equalTo((segmentedControl?.snp.bottom)!)
-            make.left.equalTo(view).offset(0)
-            make.right.equalTo(view).offset(0)
-            make.bottom.equalTo(view).offset(0)
-        }
+        collectionView.register(ContactCollectionViewCell.self, forCellWithReuseIdentifier: cellReuseIdentifier)
         return collectionView
     }()
     
@@ -61,11 +44,6 @@ class ContactListViewController: UIViewController {
         let indicator = UIActivityIndicatorView(style: .whiteLarge)
         indicator.hidesWhenStopped = true
         indicator.color = .gray
-        view.addSubview(indicator)
-        indicator.snp.makeConstraints{ make in
-            make.centerX.equalTo(self.view)
-            make.centerY.equalTo(self.view)
-        }
         return indicator
     }()
     
@@ -98,6 +76,29 @@ class ContactListViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .white
         activityIndicator.startAnimating()
+        
+        view.addSubview(segmentedControl)
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(self.view).offset(0)
+            make.width.equalTo(300)
+            make.height.equalTo(35)
+            make.centerX.equalTo(view.snp.centerX)
+        }
+        segmentedControl.addTarget(self, action: #selector(ContactListViewController.indexChanged(_:)), for: .valueChanged)
+        
+        view.addSubview(collectionView)
+        collectionView.snp.makeConstraints { make in
+            make.top.equalTo((segmentedControl?.snp.bottom)!)
+            make.left.equalTo(view).offset(0)
+            make.right.equalTo(view).offset(0)
+            make.bottom.equalTo(view).offset(0)
+        }
+        
+        view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints{ make in
+            make.centerX.equalTo(self.view)
+            make.centerY.equalTo(self.view)
+        }
     }
     
     func updateSizeClassesLayout() {
@@ -168,7 +169,8 @@ extension ContactListViewController:  UICollectionViewDelegate, UICollectionView
         let cellVm = contactListViewModel.getCellViewModel( at: indexPath )
         cell.contactCellViewModel = cellVm
         cell.btnTapAction = { [weak self]  in
-            self?.contactListViewModel.updateFavorite(for: indexPath)
+            guard let self = self else { return }
+            self.contactListViewModel.updateFavorite(for: indexPath)
         }
         return cell
     }
@@ -197,7 +199,7 @@ extension ContactListViewController {
         super.viewWillTransition(to: size, with: coordinator)
         let visibleIndexPaths = collectionView.indexPathsForVisibleItems
         if visibleIndexPaths.count > 0 {
-            currentIndexPath = visibleIndexPaths[visibleIndexPaths.count / 2]
+            currentIndexPath = visibleIndexPaths[visibleIndexPaths.count-1]
         }
         collectionView.collectionViewLayout.invalidateLayout()
     }
