@@ -168,7 +168,8 @@ extension ContactListViewController:  UICollectionViewDelegate, UICollectionView
         let cellVm = contactListViewModel.getCellViewModel( at: indexPath )
         cell.contactCellViewModel = cellVm
         cell.btnTapAction = { [weak self]  in
-            self?.contactListViewModel.updateFavorite(for: indexPath)
+            guard let self = self else { return }
+            self.contactListViewModel.updateFavorite(for: indexPath)
         }
         return cell
     }
@@ -197,7 +198,7 @@ extension ContactListViewController {
         super.viewWillTransition(to: size, with: coordinator)
         let visibleIndexPaths = collectionView.indexPathsForVisibleItems
         if visibleIndexPaths.count > 0 {
-            currentIndexPath = visibleIndexPaths[visibleIndexPaths.count / 2]
+            currentIndexPath = visibleIndexPaths[visibleIndexPaths.count-1]
         }
         collectionView.collectionViewLayout.invalidateLayout()
     }
