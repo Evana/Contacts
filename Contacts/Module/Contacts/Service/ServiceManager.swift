@@ -44,25 +44,22 @@ protocol ServiceManager {}
 extension ServiceManager {
     func responseData(urlString: String,
                              completion: @escaping (Result<Data, CustomError>) -> Void) {
-        if let url = URL(string: urlString) {
-            URLSession.shared.dataTask(with: URLRequest(url: url)) {(data, response, error) in
-                if let data = data {
-                    completion(.success(data))
-                } else if let error = error {
-                    if (error as NSError).domain == NSURLErrorDomain,
-                        (error as NSError).code == NSURLErrorNotConnectedToInternet
-                    {
-                        completion(.failure(.noNetwork))
-                    } else {
-                        completion(.failure(.system(error: error)))
-                    }
+        guard let url = URL(string: urlString) else { return completion(.failure(.invalidUrl(urlString: urlString))) }
+        URLSession.shared.dataTask(with: URLRequest(url: url)) {(data, response, error) in
+            if let data = data {
+                completion(.success(data))
+            } else if let error = error {
+                if (error as NSError).domain == NSURLErrorDomain,
+                    (error as NSError).code == NSURLErrorNotConnectedToInternet
+                {
+                    completion(.failure(.noNetwork))
                 } else {
-                    completion(.failure(.unknown))
+                    completion(.failure(.system(error: error)))
                 }
-                }.resume()
-        } else {
-            completion(.failure(.invalidUrl(urlString: urlString)))
-        }
+            } else {
+                completion(.failure(.unknown))
+            }
+            }.resume()
     }
     
     func responseObject<T: Decodable>(urlString: String,
