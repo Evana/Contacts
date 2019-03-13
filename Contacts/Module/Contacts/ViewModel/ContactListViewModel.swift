@@ -10,7 +10,10 @@ import Foundation
 
 class ContactListViewModel {
     
-    static let apiUrl = "https://gist.githubusercontent.com/pokeytc/e8c52af014cf80bc1b217103bbe7e9e4/raw/4bc01478836ad7f1fb840f5e5a3c24ea654422f7/contacts.json"
+    struct Constant {
+        static let apiUrl = "https://gist.githubusercontent.com/pokeytc/e8c52af014cf80bc1b217103bbe7e9e4/raw/4bc01478836ad7f1fb840f5e5a3c24ea654422f7/contacts.json"
+    }
+   
     var contacts: [Contact]?
     
     let contactService: ContactServiceManager
@@ -62,7 +65,7 @@ class ContactListViewModel {
     
     func fetchContact() {
         isLoading = true
-        contactService.fetchContacts(url: ContactListViewModel.apiUrl){ [weak self] result in
+        contactService.fetchContacts(url: ContactListViewModel.Constant.apiUrl){ [weak self] result in
             guard let self = self else { return }
             self.isLoading = false
             switch result {

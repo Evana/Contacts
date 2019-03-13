@@ -11,7 +11,7 @@ import SnapKit
 
 class ContactListViewController: UIViewController {
     
-    let componentColor =  UIColor.init(red: 46.0/255.0, green: 172.0/255.0, blue: 246.0/255.0, alpha: 1.0)
+    let componentColor =  UIColor(rgb: 0x2EACF6)
     let cellReuseIdentifier = "contactCell"
     
     lazy var segmentedControl: UISegmentedControl! = {
@@ -39,13 +39,6 @@ class ContactListViewController: UIViewController {
     }()
     
     private var currentIndexPath: IndexPath?
-    
-    lazy var activityIndicator: UIActivityIndicatorView! = {
-        let indicator = UIActivityIndicatorView(style: .whiteLarge)
-        indicator.hidesWhenStopped = true
-        indicator.color = .gray
-        return indicator
-    }()
     
     var flowLayout: ContactCollectionViewFlowLayout!
 
@@ -75,7 +68,6 @@ class ContactListViewController: UIViewController {
     
     private func setupView() {
         view.backgroundColor = .white
-        activityIndicator.startAnimating()
         
         view.addSubview(segmentedControl)
         segmentedControl.snp.makeConstraints { make in
@@ -94,11 +86,6 @@ class ContactListViewController: UIViewController {
             make.bottom.equalTo(view).offset(0)
         }
         
-        view.addSubview(activityIndicator)
-        activityIndicator.snp.makeConstraints{ make in
-            make.centerX.equalTo(self.view)
-            make.centerY.equalTo(self.view)
-        }
     }
     
     func updateSizeClassesLayout() {
@@ -123,9 +110,9 @@ class ContactListViewController: UIViewController {
             guard let self = self else { return }
             DispatchQueue.main.async {
                 if self.contactListViewModel.isLoading {
-                    self.activityIndicator.startAnimating()
+                    self.showLoader()
                 } else {
-                    self.activityIndicator.stopAnimating()
+                    self.hideLoader()
                 }
             }
         }
@@ -137,12 +124,6 @@ class ContactListViewController: UIViewController {
             }
         }
         contactListViewModel.fetchContact()
-    }
-    
-    private func showAlert( _ message: String ) {
-        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
-        alert.addAction( UIAlertAction(title: "Ok", style: .cancel, handler: nil))
-        self.present(alert, animated: true, completion: nil)
     }
     
     @objc func indexChanged(_ sender: UISegmentedControl) {

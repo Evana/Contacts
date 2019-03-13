@@ -10,6 +10,10 @@
 		2016B981223120FA00C93ED7 /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016B980223120FA00C93ED7 /* ServiceManager.swift */; };
 		2016B983223126CA00C93ED7 /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016B982223126CA00C93ED7 /* CustomError.swift */; };
 		2016B989223212BE00C93ED7 /* ContactListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2016B988223212BE00C93ED7 /* ContactListViewModelTests.swift */; };
+		203A52EF22387DB7003150C8 /* UIColor+rgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A52EE22387DB7003150C8 /* UIColor+rgb.swift */; };
+		203A52F022387DDD003150C8 /* UIColor+rgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A52EE22387DB7003150C8 /* UIColor+rgb.swift */; };
+		203A52F2223889C7003150C8 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A52F1223889C7003150C8 /* UIViewController+Alert.swift */; };
+		203A52F422388ABA003150C8 /* UIViewController+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A52F322388ABA003150C8 /* UIViewController+Loading.swift */; };
 		205A7C1422298FB200F28112 /* ContactCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C1322298FB200F28112 /* ContactCollectionViewFlowLayout.swift */; };
 		205A7C1622298FF000F28112 /* CollectionViewSizeClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C1522298FF000F28112 /* CollectionViewSizeClass.swift */; };
 		205A7C182229903900F28112 /* ContactCollectionViewGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C172229903900F28112 /* ContactCollectionViewGridLayout.swift */; };
@@ -47,6 +51,9 @@
 		2016B980223120FA00C93ED7 /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
 		2016B982223126CA00C93ED7 /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		2016B988223212BE00C93ED7 /* ContactListViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContactListViewModelTests.swift; sourceTree = "<group>"; };
+		203A52EE22387DB7003150C8 /* UIColor+rgb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+rgb.swift"; sourceTree = "<group>"; };
+		203A52F1223889C7003150C8 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
+		203A52F322388ABA003150C8 /* UIViewController+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Loading.swift"; sourceTree = "<group>"; };
 		205A7C1322298FB200F28112 /* ContactCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		205A7C1522298FF000F28112 /* CollectionViewSizeClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSizeClass.swift; sourceTree = "<group>"; };
 		205A7C172229903900F28112 /* ContactCollectionViewGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewGridLayout.swift; sourceTree = "<group>"; };
@@ -88,6 +95,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		203A52ED22387D9A003150C8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				203A52EE22387DB7003150C8 /* UIColor+rgb.swift */,
+				203A52F1223889C7003150C8 /* UIViewController+Alert.swift */,
+				203A52F322388ABA003150C8 /* UIViewController+Loading.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		205A7C1B2229938A00F28112 /* Json */ = {
 			isa = PBXGroup;
 			children = (
@@ -222,6 +239,7 @@
 		2071C4FD22298E730038C299 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				203A52ED22387D9A003150C8 /* Extension */,
 				205A7C1B2229938A00F28112 /* Json */,
 			);
 			path = Helper;
@@ -418,6 +436,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				203A52F2223889C7003150C8 /* UIViewController+Alert.swift in Sources */,
+				203A52EF22387DB7003150C8 /* UIColor+rgb.swift in Sources */,
 				205A7C1622298FF000F28112 /* CollectionViewSizeClass.swift in Sources */,
 				205A7C182229903900F28112 /* ContactCollectionViewGridLayout.swift in Sources */,
 				2071C4EB2229839C0038C299 /* Contact.swift in Sources */,
@@ -430,6 +450,7 @@
 				2071C4EE222984490038C299 /* ContactService.swift in Sources */,
 				2016B981223120FA00C93ED7 /* ServiceManager.swift in Sources */,
 				2071C4FB22298E100038C299 /* ContactListViewController.swift in Sources */,
+				203A52F422388ABA003150C8 /* UIViewController+Loading.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +458,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				203A52F022387DDD003150C8 /* UIColor+rgb.swift in Sources */,
 				2071C4DF2229809C0038C299 /* ContactsServiceTests.swift in Sources */,
 				2016B989223212BE00C93ED7 /* ContactListViewModelTests.swift in Sources */,
 			);
