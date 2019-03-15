@@ -47,17 +47,11 @@ class ContactListViewController: UIViewController {
     }()
     
     var gridWith: CGFloat {
-        var width: CGFloat = 0.0
-        if traitCollection.horizontalSizeClass == .regular {
-            if UIDevice.current.orientation == .portrait {
-                width = UIScreen.main.bounds.size.width - 20
-            } else {
-                width = UIScreen.main.bounds.size.width/2 + 10
-            }
-        } else {
-            width = UIScreen.main.bounds.size.width - 20
-        }
-        return width
+        return self.traitCollection.horizontalSizeClass == .regular ?
+            UIScreen.main.bounds.size.width - 20 :
+            (UIDevice.current.orientation.isPortrait == true ?
+                UIScreen.main.bounds.size.width - 20 :
+                UIScreen.main.bounds.size.width/2 + 20)
     }
     
     override func viewDidLoad() {

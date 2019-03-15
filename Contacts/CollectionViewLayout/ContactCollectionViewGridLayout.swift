@@ -14,10 +14,10 @@ struct ContactCollectionViewGridLayout {
     let cellSize: CGFloat
     let cellsPerRow: Int
     
-    init(sizeClass: CollectionViewSizeClass, edgeInsets: UIEdgeInsets, gridWidth: CGFloat, desiredCellSize: CGFloat) {
+    init(sizeClass: CollectionViewSizeClass, edgeInsets: UIEdgeInsets, gridWidth: CGFloat, desiredCellWidth: CGFloat) {
         spacingBetweenCells = 10.0
         let availableGridWidth = gridWidth - edgeInsets.left - edgeInsets.right
         cellsPerRow = sizeClass == .regular ? 2 : 1
-        cellSize = floor(availableGridWidth / CGFloat(cellsPerRow) + spacingBetweenCells / 2)
+        cellSize = floor(availableGridWidth / CGFloat(cellsPerRow) - spacingBetweenCells / 2)
     }
 }
