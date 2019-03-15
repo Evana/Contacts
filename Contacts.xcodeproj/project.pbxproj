@@ -14,6 +14,7 @@
 		203A52F022387DDD003150C8 /* UIColor+rgb.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A52EE22387DB7003150C8 /* UIColor+rgb.swift */; };
 		203A52F2223889C7003150C8 /* UIViewController+Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A52F1223889C7003150C8 /* UIViewController+Alert.swift */; };
 		203A52F422388ABA003150C8 /* UIViewController+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A52F322388ABA003150C8 /* UIViewController+Loading.swift */; };
+		203A52FF223BF23D003150C8 /* CacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 203A52FE223BF23D003150C8 /* CacheManager.swift */; };
 		205A7C1422298FB200F28112 /* ContactCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C1322298FB200F28112 /* ContactCollectionViewFlowLayout.swift */; };
 		205A7C1622298FF000F28112 /* CollectionViewSizeClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C1522298FF000F28112 /* CollectionViewSizeClass.swift */; };
 		205A7C182229903900F28112 /* ContactCollectionViewGridLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205A7C172229903900F28112 /* ContactCollectionViewGridLayout.swift */; };
@@ -54,6 +55,7 @@
 		203A52EE22387DB7003150C8 /* UIColor+rgb.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+rgb.swift"; sourceTree = "<group>"; };
 		203A52F1223889C7003150C8 /* UIViewController+Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Alert.swift"; sourceTree = "<group>"; };
 		203A52F322388ABA003150C8 /* UIViewController+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Loading.swift"; sourceTree = "<group>"; };
+		203A52FE223BF23D003150C8 /* CacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CacheManager.swift; sourceTree = "<group>"; };
 		205A7C1322298FB200F28112 /* ContactCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		205A7C1522298FF000F28112 /* CollectionViewSizeClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewSizeClass.swift; sourceTree = "<group>"; };
 		205A7C172229903900F28112 /* ContactCollectionViewGridLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactCollectionViewGridLayout.swift; sourceTree = "<group>"; };
@@ -103,6 +105,15 @@
 				203A52F322388ABA003150C8 /* UIViewController+Loading.swift */,
 			);
 			path = Extension;
+			sourceTree = "<group>";
+		};
+		203A52FD223BF21E003150C8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2016B980223120FA00C93ED7 /* ServiceManager.swift */,
+				203A52FE223BF23D003150C8 /* CacheManager.swift */,
+			);
+			path = Model;
 			sourceTree = "<group>";
 		};
 		205A7C1B2229938A00F28112 /* Json */ = {
@@ -161,6 +172,7 @@
 		2071C4C82229809A0038C299 /* Contacts */ = {
 			isa = PBXGroup;
 			children = (
+				203A52FD223BF21E003150C8 /* Model */,
 				2071C4FE22298E7A0038C299 /* CollectionViewLayout */,
 				205A7C1C2229942900F28112 /* CustomView */,
 				2071C4FD22298E730038C299 /* Helper */,
@@ -195,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				2071C4ED222984490038C299 /* ContactService.swift */,
-				2016B980223120FA00C93ED7 /* ServiceManager.swift */,
 				2016B982223126CA00C93ED7 /* CustomError.swift */,
 			);
 			path = Service;
@@ -448,6 +459,7 @@
 				205A7C1E2229943A00F28112 /* CustomUIButton.swift in Sources */,
 				205A7C1422298FB200F28112 /* ContactCollectionViewFlowLayout.swift in Sources */,
 				2071C4EE222984490038C299 /* ContactService.swift in Sources */,
+				203A52FF223BF23D003150C8 /* CacheManager.swift in Sources */,
 				2016B981223120FA00C93ED7 /* ServiceManager.swift in Sources */,
 				2071C4FB22298E100038C299 /* ContactListViewController.swift in Sources */,
 				203A52F422388ABA003150C8 /* UIViewController+Loading.swift in Sources */,
