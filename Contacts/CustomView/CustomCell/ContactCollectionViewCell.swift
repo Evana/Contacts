@@ -10,7 +10,7 @@ import UIKit
 import SnapKit
 
 class ContactCollectionViewCell: UICollectionViewCell {
-    lazy var avatarImageView: UIImageView! = {
+    private lazy var avatarImageView: UIImageView! = {
         let avatarImageView = UIImageView()
         avatarImageView.backgroundColor = .gray
         contentView.addSubview(avatarImageView)
@@ -23,7 +23,7 @@ class ContactCollectionViewCell: UICollectionViewCell {
         return avatarImageView
     }()
     
-    lazy var favoriteButton: UIButton! = {
+    private lazy var favoriteButton: UIButton! = {
         let favoriteButton = UIButton()
         contentView.addSubview(favoriteButton)
         favoriteButton.snp.makeConstraints { (make) in
@@ -36,7 +36,7 @@ class ContactCollectionViewCell: UICollectionViewCell {
         return favoriteButton
     }()
     
-    lazy var nameLabel: UILabel! = {
+    private lazy var nameLabel: UILabel! = {
         let label = UILabel()
         contentView.addSubview(label)
         label.snp.makeConstraints { (make) in
@@ -48,7 +48,7 @@ class ContactCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    lazy var emailLabel: UILabel! = {
+    private lazy var emailLabel: UILabel! = {
         let label = UILabel()
         contentView.addSubview(label)
         label.snp.makeConstraints { (make) in
@@ -63,12 +63,27 @@ class ContactCollectionViewCell: UICollectionViewCell {
     
     var btnTapAction : (() -> ())?
     
-    var contactCellViewModel : ContactCellViewModel? {
+    var name: String? {
         didSet {
-            nameLabel.text = contactCellViewModel?.name
-            emailLabel.text = contactCellViewModel?.email
-            avatarImageView.image = UIImage(named: contactCellViewModel?.avatarImage ?? "")
-            favoriteButton.tintColor = contactCellViewModel?.isFavorite ?? false ?  .red : .lightGray
+            nameLabel.text = name
+        }
+    }
+    
+    var email: String? {
+        didSet {
+            emailLabel.text = email
+        }
+    }
+    
+    var isFavorite: Bool? {
+        didSet {
+            favoriteButton.tintColor = isFavorite ?? false ?  .red : .lightGray
+        }
+    }
+    
+    var avatarImage: String? {
+        didSet {
+            avatarImageView.image = UIImage(named: avatarImage ?? "")
         }
     }
     
@@ -91,10 +106,6 @@ class ContactCollectionViewCell: UICollectionViewCell {
     }
     
     @objc func tappedOnFavorite() {
-        if let isFavorite = contactCellViewModel?.isFavorite {
-            contactCellViewModel?.isFavorite = !isFavorite
-            updateButtonColor(!isFavorite)
-            btnTapAction?()
-        }
+        btnTapAction?()
     }
 }

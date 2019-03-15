@@ -152,10 +152,16 @@ extension ContactListViewController:  UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath) as! ContactCollectionViewCell
         let cellVm = contactListViewModel.getCellViewModel( at: indexPath )
-        cell.contactCellViewModel = cellVm
+        cell.name = cellVm?.name
+        cell.email = cellVm?.email
+        cell.avatarImage = cellVm?.avatarImage
+        cell.isFavorite = cellVm?.isFavorite
         cell.btnTapAction = { [weak self]  in
             guard let self = self else { return }
             self.contactListViewModel.updateFavorite(for: indexPath)
+            if let isFavorite = cellVm?.isFavorite {
+                cell.updateButtonColor(!isFavorite)
+            }
         }
         return cell
     }
