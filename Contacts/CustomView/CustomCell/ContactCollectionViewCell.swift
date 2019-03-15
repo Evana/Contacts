@@ -40,7 +40,7 @@ class ContactCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         contentView.addSubview(label)
         label.snp.makeConstraints { (make) in
-            make.top.equalTo(avatarImageView.snp.bottom).offset(10)
+            make.top.greaterThanOrEqualTo(avatarImageView.snp.bottom).offset(10).priority(.medium)
             make.left.equalTo(20)
             make.height.equalTo(20)
             make.right.equalTo(favoriteButton.snp.left).offset(-10)
@@ -54,7 +54,7 @@ class ContactCollectionViewCell: UICollectionViewCell {
         label.snp.makeConstraints { (make) in
             make.top.equalTo(nameLabel.snp.bottom).offset(5)
             make.left.equalTo(20)
-            make.height.greaterThanOrEqualTo(20)
+            make.height.equalTo(20)
             make.right.equalTo(favoriteButton.snp.left).offset(-10)
             make.bottom.equalTo(contentView).offset(-10)
         }
