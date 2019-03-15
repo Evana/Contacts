@@ -16,9 +16,9 @@ class ContactCollectionViewFlowLayout: NSObject, UICollectionViewDelegateFlowLay
     
     init(gridWidth: CGFloat, sizeClass: CollectionViewSizeClass) {
         self.sizeClass = sizeClass
-        self.edgeInsets = sizeClass == .regular ? UIEdgeInsets(top: 15, left: 25, bottom: 10, right: 10) : UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        let desiredCellSize: CGFloat = sizeClass == .regular ? gridWidth/2 : gridWidth
-        contactGridLayout = ContactCollectionViewGridLayout(sizeClass: sizeClass, edgeInsets: edgeInsets, gridWidth: gridWidth, desiredCellSize: desiredCellSize)
+        self.edgeInsets = sizeClass == .regular ? UIEdgeInsets(top: 15, left: 25, bottom: 10, right: 25) : UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        let desiredCellWidth: CGFloat = sizeClass == .regular ? gridWidth/2 : gridWidth
+        contactGridLayout = ContactCollectionViewGridLayout(sizeClass: sizeClass, edgeInsets: edgeInsets, gridWidth: gridWidth, desiredCellWidth: desiredCellWidth)
     }
     
     // MARK: Grid Layout

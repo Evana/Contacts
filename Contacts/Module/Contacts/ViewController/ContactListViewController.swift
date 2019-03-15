@@ -47,12 +47,15 @@ class ContactListViewController: UIViewController {
     }()
     
     var gridWith: CGFloat {
-        return self.traitCollection.horizontalSizeClass == .regular ? UIScreen.main.bounds.size.width - 20 : (UIDevice.current.orientation == .portrait ? UIScreen.main.bounds.size.width - 20 : UIScreen.main.bounds.size.width/2 + 10)
+        return self.traitCollection.horizontalSizeClass == .regular ?
+            UIScreen.main.bounds.size.width - 20 :
+            (UIDevice.current.orientation.isPortrait == true ?
+                UIScreen.main.bounds.size.width - 20 :
+                UIScreen.main.bounds.size.width/2 + 20)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Contacts"
         initialiseViewModel()
         setupView()
 
@@ -97,6 +100,7 @@ class ContactListViewController: UIViewController {
     }
     
     func initialiseViewModel() {
+        title = contactListViewModel.title
         contactListViewModel.showAlertClosure = { [weak self]  in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -148,10 +152,16 @@ extension ContactListViewController:  UICollectionViewDelegate, UICollectionView
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellReuseIdentifier, for: indexPath as IndexPath) as! ContactCollectionViewCell
         let cellVm = contactListViewModel.getCellViewModel( at: indexPath )
-        cell.contactCellViewModel = cellVm
+        cell.name = cellVm?.name
+        cell.email = cellVm?.email
+        cell.avatarImage = cellVm?.avatarImage
+        cell.isFavorite = cellVm?.isFavorite
         cell.btnTapAction = { [weak self]  in
             guard let self = self else { return }
             self.contactListViewModel.updateFavorite(for: indexPath)
+            if let isFavorite = cellVm?.isFavorite {
+                cell.updateButtonColor(!isFavorite)
+            }
         }
         return cell
     }
