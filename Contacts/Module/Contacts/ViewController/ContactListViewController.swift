@@ -47,12 +47,21 @@ class ContactListViewController: UIViewController {
     }()
     
     var gridWith: CGFloat {
-        return self.traitCollection.horizontalSizeClass == .regular ? UIScreen.main.bounds.size.width - 20 : (UIDevice.current.orientation == .portrait ? UIScreen.main.bounds.size.width - 20 : UIScreen.main.bounds.size.width/2 + 10)
+        var width: CGFloat = 0.0
+        if traitCollection.horizontalSizeClass == .regular {
+            if UIDevice.current.orientation == .portrait {
+                width = UIScreen.main.bounds.size.width - 20
+            } else {
+                width = UIScreen.main.bounds.size.width/2 + 10
+            }
+        } else {
+            width = UIScreen.main.bounds.size.width - 20
+        }
+        return width
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Contacts"
         initialiseViewModel()
         setupView()
 
@@ -97,6 +106,7 @@ class ContactListViewController: UIViewController {
     }
     
     func initialiseViewModel() {
+        title = contactListViewModel.title
         contactListViewModel.showAlertClosure = { [weak self]  in
             guard let self = self else { return }
             DispatchQueue.main.async {
