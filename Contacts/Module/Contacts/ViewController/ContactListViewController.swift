@@ -209,3 +209,5 @@ extension ContactListViewController {
     }
     
 }
+
+extension ContactListViewController: Alertable {}
