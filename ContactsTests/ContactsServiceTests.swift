@@ -27,7 +27,7 @@ class ContactsServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "callBack")
         let fetchExpectation = XCTestExpectation(description: "fetchContacts")
         
-        contactService?.fetchContacts(url: ContactListViewModel.apiUrl) { result in
+        contactService?.fetchContacts(url: ContactListViewModel.Constant.apiUrl) { result in
             expectation.fulfill()
             switch result {
             case .success(let contacts):
